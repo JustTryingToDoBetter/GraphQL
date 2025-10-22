@@ -1,0 +1,6 @@
+we need to inform gql how the data is arrange via a schema 
+
+root query is the action point
+
+resolve func go finds what we are looking for. 
+grabs the data
