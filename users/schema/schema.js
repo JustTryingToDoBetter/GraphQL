@@ -2,8 +2,6 @@
 
 const graphql = require('graphql')
 const _ = require('lodash')
-const schema = require('./schema/schema')
-
 const {
     GraphQLObjectType, // id of user]\
     GraphQLInt, 
