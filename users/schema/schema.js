@@ -80,9 +80,36 @@ const mutation=  new GraphQLObjectType({
                 age : {type: new GraphQLNonNull(GraphQLInt)},
                 companyId: {type: new GraphQLNonNull(GraphQLString)}
             },
-            resolve(parentValue, args) {
-                
+            //undergoes the mutation
+            resolve(parentValue, {firstName, age}) {
+                return axios.post('http://localhost:3000/users', {firstName, age})
+                .then(res => res.data)
             }
+        },
+        deleteUser: {
+            type: UserType,
+            args: {
+                id: {type : new GraphQLNonNull(GraphQLString)}
+            },
+            resolve(parentValue, {id}) {
+                return axios.delete(`http://local:3000/users/${id}`)
+                .then(res => res.data)
+            }
+        },
+
+        updateUser: {
+            type: UserType,
+             args: {
+                id: {type: new GraphQLNonNull(GraphQLString)}, 
+                firstName: {type: new GraphQLNonNull(GraphQLString)}, 
+                age : {type: new GraphQLNonNull(GraphQLInt)},
+                companyId: {type: new GraphQLNonNull(GraphQLString)}
+            },
+            resolve(parentValue, args) {
+                return axios.patch(`http://localhost:3000/users${args.id}`, args)
+                .then(res => res.data)
+            }
+
         }
     }
 
@@ -92,5 +119,6 @@ const mutation=  new GraphQLObjectType({
 
 
 module.exports = new GraphQLSchema({
-    query: RootQuery
+    query: RootQuery,
+    mutation
 })
