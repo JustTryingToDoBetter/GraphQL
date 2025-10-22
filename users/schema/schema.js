@@ -1,7 +1,7 @@
 //all knowledge and properties and relationships
 
 const graphql = require('graphql')
-const _ = require('lodash')
+const axios = require('axios')
 const {
     GraphQLObjectType, // id of user]\
     GraphQLInt, 
@@ -9,10 +9,6 @@ const {
     GraphQLSchema
 } = graphql;
 
-const users = [
-    {id : '23', firstName: 'Jaydin', age: 23 }, 
-    {id : '21', firstName: 'Jonna', age: 22 }, 
-]
 
 
 //creating properties
@@ -32,7 +28,8 @@ const RootQuery = new GraphQLObjectType({
             type: UserType,
             args: {id :{ type : GraphQLString}} , 
             resolve(parentValue, args) {
-                return _.find(users, {id : args.id})
+                return axios.get(`http://localhost:3000/users/${args.id}`)
+                    .then(resp => resp.data)
             }
         }
     }

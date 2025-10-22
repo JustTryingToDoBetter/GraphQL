@@ -8,6 +8,6 @@ app.use('/graph', expressGraphQL({
     graphiql: true //makes query against our dev server
 }))
 
-app.listen(4000,() =>{
+app.listen(4000, '0.0.0.0', () =>{
     console.log("Listening");
 })
