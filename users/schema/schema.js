@@ -1,6 +1,7 @@
 //all knowledge and properties and relationships
 
 const graphql = require('graphql')
+const _ = require('lodash')
 
 const {
     GraphQLObjectType, // id of user]\
@@ -8,7 +9,10 @@ const {
     GraphQLString
 } = graphql;
 
-c
+const users = [
+    {id : '23', firstName: 'Jaydin', age: 23 }, 
+    {id : '21', firstName: 'Jonna', age: 22 }, 
+]
 
 
 //creating properties
