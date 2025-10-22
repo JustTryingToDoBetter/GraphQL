@@ -2,11 +2,13 @@
 
 const graphql = require('graphql')
 const _ = require('lodash')
+const schema = require('./schema/schema')
 
 const {
     GraphQLObjectType, // id of user]\
     GraphQLInt, 
-    GraphQLString
+    GraphQLString,
+    GraphQLSchema
 } = graphql;
 
 const users = [
@@ -32,8 +34,12 @@ const RootQuery = new GraphQLObjectType({
             type: UserType,
             args: {id :{ type : GraphQLString}} , 
             resolve(parentValue, args) {
-
+                return _.find(users, {id : args.id})
             }
         }
     }
 });
+
+module.exports = new GraphQLSchema({
+    query: RootQuery
+})

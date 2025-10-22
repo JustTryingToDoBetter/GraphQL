@@ -1,8 +1,10 @@
-const express = require('express')
+const express = require('express');
+const schema = require('./schema/schema');
 const expressGraphQL = require('express-graphql').graphqlHTTP; // glue layer
 const app = express()
 
 app.use('/graph', expressGraphQL({
+    schema: schema,
     graphiql: true //makes query against our dev server
 }))
 
